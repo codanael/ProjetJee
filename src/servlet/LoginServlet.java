@@ -45,7 +45,7 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		if(session.getAttribute("user")==null)session.setAttribute("user", metierUtilisateur);
-		if(metierUtilisateur.getUsername() == null || metierUtilisateur.getpassword() == null) {
+		if(user.getusername() == null ) {
 			RequestDispatcher vue =request.getRequestDispatcher("/WEB-INF/Index.jsp");
 			vue.forward(request, response);
 		}

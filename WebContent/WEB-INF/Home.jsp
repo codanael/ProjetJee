@@ -8,6 +8,6 @@
 <title>Home</title>
 </head>
 <body>
-<%-- <p>Hi <c:out value="${sessionScope.user.username}"></c:out> </p> --%>
+<p>Hi <c:out value="${sessionScope.user.username}"></c:out> </p>
 </body>
 </html>

@@ -10,8 +10,8 @@ public interface UtilisateurLocal {
 	public UtilisateurEntity addUtilisateur(String username, String password);
 	public UtilisateurEntity getUtilisateur(int id);
 	public List<UtilisateurEntity> getutilisateurs();
-	public int getid(UtilisateurEntity u);
-	public String getusername(UtilisateurEntity u);
-	public String getpassword(UtilisateurEntity u);
+	int getid();
+	String getusername();
+	String getpassword();
 	
 }
