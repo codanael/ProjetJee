@@ -15,21 +15,20 @@ import post.PostLocal;
 import utilisateur.UtilisateurLocal;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class PostServlet
  */
-@WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/PostServlet")
+public class PostServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public PostServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
     
-  
     @EJB
     UtilisateurLocal metierUtilisateur;
     
@@ -40,16 +39,8 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		if(session.getAttribute("user")==null)session.setAttribute("user", metierUtilisateur);
-		if(metierUtilisateur.getusername() == null ) {
-			RequestDispatcher vue =request.getRequestDispatcher("/Index.jsp");
-			vue.forward(request, response);
-		}
-		else {
-			RequestDispatcher vue =request.getRequestDispatcher("/Home.jsp");
-			vue.forward(request, response);
-		}
+		RequestDispatcher vue =request.getRequestDispatcher("/Home.jsp");
+		vue.forward(request, response);
 	}
 
 	/**
@@ -57,9 +48,9 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		metierUtilisateur.addUtilisateur(request.getParameter("username"), request.getParameter("password"));
-		session.setAttribute("user", metierUtilisateur);
-		response.sendRedirect(request.getContextPath() +"/LoginServlet");
+		metierUtilisateur = (UtilisateurLocal) session.getAttribute("user");
+		metierPost.addPost(request.getParameter("titre"), request.getParameter("contenu"), metierUtilisateur.getUtilisateur());
+		doGet(request, response);
 	}
 
 }

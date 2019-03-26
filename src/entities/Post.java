@@ -1,9 +1,12 @@
 package entities;
 
+import java.util.Calendar;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Post {
@@ -11,27 +14,32 @@ public class Post {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	int id;
-	String date;
+	Calendar date;
 	String titre;
 	String contenu;
+	@ManyToOne
+	UtilisateurEntity utilisateur;
 	public Post() {
 		super();
 	}
-	public Post(String titre, String contenu) {
+
+	public Post(String titre, String contenu, UtilisateurEntity utilisateur) {
 		super();
 		this.titre = titre;
 		this.contenu = contenu;
+		this.utilisateur = utilisateur;
 	}
+
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getDate() {
+	public Calendar getDate() {
 		return date;
 	}
-	public void setDate(String date) {
+	public void setDate(Calendar date) {
 		this.date = date;
 	}
 	public String getTitre() {
@@ -46,6 +54,13 @@ public class Post {
 	public void setContenu(String contenu) {
 		this.contenu = contenu;
 	}
+	public UtilisateurEntity getUtilisateur() {
+		return utilisateur;
+	}
+	public void setUtilisateur(UtilisateurEntity utilisateur) {
+		this.utilisateur = utilisateur;
+	}
+	
 	
 	
 

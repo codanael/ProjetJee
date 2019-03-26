@@ -54,17 +54,44 @@ public class UtilisateurImpl implements UtilisateurLocal {
 
 	@Override
 	public int getid() {
-		return utilisateur.getId();
+		try {
+			return utilisateur.getId();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return 0;
+		}
 	}
 
 	@Override
 	public String getusername() {
-		return utilisateur.getUsername();
+		try {
+			return utilisateur.getUsername();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return null;
+		}
 	}
 
 	@Override
 	public String getpassword() {
-		return utilisateur.getPassword();
+		try {
+			return utilisateur.getPassword();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return null;
+		}
+	}
+
+	@Override
+	public void setusername(String username) {
+		utilisateur.setUsername(username);
+		
+	}
+
+	@Override
+	public void setpassword(String password) {
+		utilisateur.setPassword(password); 
+		
 	}
 
 }

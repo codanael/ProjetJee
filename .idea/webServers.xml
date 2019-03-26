@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="c7774ae9-d9a3-421d-aea5-b70d675ee897" name="tomee" url="http://localhost">
+        <fileTransfer port="0" mountedRoot="$USER_HOME$/eclipse/apache-tomee-plume-8.0.0-M1" accessType="MOUNT" />
+      </webServer>
+    </option>
+  </component>
+</project>
