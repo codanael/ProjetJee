@@ -1,11 +1,12 @@
 package post;
 
 import java.util.Calendar;
-import java.util.Date;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import entities.Post;
 import entities.UtilisateurEntity;
@@ -34,6 +35,12 @@ public class PostImpl implements PostLocal {
 		if(p == null) throw new RuntimeException("Ce post n'existe pas");
 		return p;
 
+	}
+
+	@Override
+	public List<Post> getPosts() {
+		Query req = em.createQuery("select p from Post p");
+		return req.getResultList();
 	}
 
 }
