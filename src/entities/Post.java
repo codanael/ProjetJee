@@ -2,6 +2,7 @@ package entities;
 
 import java.util.Calendar;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,6 +17,7 @@ public class Post {
 	int id;
 	Calendar date;
 	String titre;
+	 @Column(length=65234)
 	String contenu;
 	@ManyToOne
 	UtilisateurEntity utilisateur;
