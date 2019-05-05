@@ -19,9 +19,12 @@ public class UtilisateurImpl implements UtilisateurLocal {
 	@Override
 	public UtilisateurEntity addUtilisateur(String username, String password) {
 		try {
+			if(this.getUtilisateur(username) == null) {
 			utilisateur = new UtilisateurEntity(username, password);
 			em.persist(utilisateur);
 			return utilisateur;
+			}
+			return null;
 		} catch (RuntimeException e) {
 			return null;
 		}
@@ -40,8 +43,7 @@ public class UtilisateurImpl implements UtilisateurLocal {
 			UtilisateurEntity u = (UtilisateurEntity)req.getSingleResult();
 			return u;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Cet utilisateur n'existe pas");
 			return null;
 		}
 	}

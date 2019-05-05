@@ -42,10 +42,10 @@ public class SignInServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		metierUtilisateur.addUtilisateur(request.getParameter("username"), request.getParameter("password"));
-		session.setAttribute("user", metierUtilisateur);
-		metierUtilisateur.setusername(request.getParameter("username"));
-		
+		if(metierUtilisateur.addUtilisateur(request.getParameter("username"), request.getParameter("password")) != null) {
+			metierUtilisateur.setusername(request.getParameter("username"));
+			session.setAttribute("user", metierUtilisateur);
+	}
 		response.sendRedirect(request.getContextPath() +"/LoginServlet");
 	}
 	
