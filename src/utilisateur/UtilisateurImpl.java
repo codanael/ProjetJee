@@ -112,8 +112,6 @@ public class UtilisateurImpl implements UtilisateurLocal {
 		try {
 			UtilisateurEntity u = this.getUtilisateur(username);
 			if(u.getPassword().hashCode() == password.hashCode()) {
-				System.out.println("Okay");
-				System.out.println(u.getPassword());
 				utilisateur = new UtilisateurEntity(u.getUsername(), u.getPassword());
 				return utilisateur;
 			}
@@ -127,7 +125,7 @@ public class UtilisateurImpl implements UtilisateurLocal {
 	@Override
 	public UtilisateurEntity logout() {
 		utilisateur = null;
-		return null;
+		return utilisateur;
 	}
 
 }

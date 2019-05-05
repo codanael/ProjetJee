@@ -13,30 +13,27 @@ import javax.servlet.http.HttpSession;
 import utilisateur.UtilisateurLocal;
 
 /**
- * Servlet implementation class LogoutServlet
+ * Servlet implementation class SignInServlet
  */
-@WebServlet("/LogoutServlet")
-public class LogoutServlet extends HttpServlet {
+@WebServlet("/SignInServlet")
+public class SignInServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LogoutServlet() {
+    public SignInServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
+    
     @EJB
-    UtilisateurLocal metierUtilisateur;
+	UtilisateurLocal metierUtilisateur;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		session.removeAttribute("user");
-		session.invalidate();
-		metierUtilisateur.logout();
 		response.sendRedirect(request.getContextPath() +"/LoginServlet");
 	}
 
@@ -44,7 +41,13 @@ public class LogoutServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		metierUtilisateur.addUtilisateur(request.getParameter("username"), request.getParameter("password"));
+		session.setAttribute("user", metierUtilisateur);
+		metierUtilisateur.setusername(request.getParameter("username"));
+		
 		response.sendRedirect(request.getContextPath() +"/LoginServlet");
 	}
+	
 
 }

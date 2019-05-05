@@ -5,10 +5,18 @@
 	<div class="container">
 		<form action="LoginServlet" method="post" name="Submit">
 			<label for="username">Username:</label> <input class="w3-input w3-border" type="text" name="username" />
-
-		<label for="pass">Password (8 characters minimum):</label> 
+			<label for="pass">Password (8 characters minimum):</label> 
 		<input class="w3-input w3-border" type="password"  name="password"	 required />
-	<input class="w3-button" type="submit"	value="Sign in" />
+	<input class="w3-button" type="submit"	value="Login"/>
+	</form>
+	</div>
+	
+	<div class="container">
+		<form action="SignInServlet" method="post" name="Submit">
+			<label for="username">Username:</label> <input class="w3-input w3-border" type="text" name="username" />
+			<label for="pass">Password (8 characters minimum):</label> 
+		<input class="w3-input w3-border" type="password"  name="password"	 required />
+	<input class="w3-button" type="submit"	value="Sign In"/>
 	</form>
 	</div>
 </body>
