@@ -37,9 +37,10 @@ public class PostImpl implements PostLocal {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Post> getPosts() {
-		Query req = em.createQuery("select p from Post p");
+		Query req = em.createQuery("select p from Post p ORDER BY p.date DESC");
 		return req.getResultList();
 	}
 
