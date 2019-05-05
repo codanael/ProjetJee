@@ -35,7 +35,9 @@ public class LogoutServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		session.setAttribute("user", metierUtilisateur);
+		session.removeAttribute("user");
+		session.invalidate();
+		metierUtilisateur.logout();
 		RequestDispatcher vue =request.getRequestDispatcher("/Index.jsp");
 		vue.forward(request, response);
 	}

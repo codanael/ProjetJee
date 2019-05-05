@@ -34,6 +34,18 @@ public class UtilisateurImpl implements UtilisateurLocal {
 		return u;
 	}
 	
+	public UtilisateurEntity getUtilisateur(String username) {
+		try {
+			Query req = em.createQuery("select u from utilisateur u WHERE u.username = :name").setParameter("name", username);
+			UtilisateurEntity u = (UtilisateurEntity)req.getSingleResult();
+			return u;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	public UtilisateurEntity getUtilisateur() {
 		
 		try {
@@ -92,6 +104,30 @@ public class UtilisateurImpl implements UtilisateurLocal {
 	public void setpassword(String password) {
 		utilisateur.setPassword(password); 
 		
+	}
+
+	@Override
+	public UtilisateurEntity login(String username, String password) {
+		
+		try {
+			UtilisateurEntity u = this.getUtilisateur(username);
+			if(u.getPassword().hashCode() == password.hashCode()) {
+				System.out.println("Okay");
+				System.out.println(u.getPassword());
+				utilisateur = new UtilisateurEntity(u.getUsername(), u.getPassword());
+				return utilisateur;
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public UtilisateurEntity logout() {
+		utilisateur = null;
+		return null;
 	}
 
 }

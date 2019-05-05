@@ -7,6 +7,12 @@ import entities.UtilisateurEntity;
 
 @Local
 public interface UtilisateurLocal {
+	
+	public UtilisateurEntity logout();
+	
+	
+	public UtilisateurEntity login(String username, String password);
+	
 	/**
 	 * Creation d'un utilisateur
 	 * @param username : nom d'utilisateur

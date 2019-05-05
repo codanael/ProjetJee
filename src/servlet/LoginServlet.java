@@ -20,29 +20,28 @@ import utilisateur.UtilisateurLocal;
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public LoginServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-    
-  
-    @EJB
-    UtilisateurLocal metierUtilisateur;
-    
-    @EJB
-    PostLocal metierPost;
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public LoginServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+	@EJB
+	UtilisateurLocal metierUtilisateur;
+
+	@EJB
+	PostLocal metierPost;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		if(session.getAttribute("user")==null)session.setAttribute("user", metierUtilisateur);
-		if(metierUtilisateur.getusername() == null ) {
+		if(metierUtilisateur.getusername() == null || session.getAttribute("user") == null) {
 			RequestDispatcher vue =request.getRequestDispatcher("/Index.jsp");
 			vue.forward(request, response);
 		}
@@ -57,8 +56,9 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		metierUtilisateur.addUtilisateur(request.getParameter("username"), request.getParameter("password"));
-		session.setAttribute("user", metierUtilisateur);
+		if(metierUtilisateur.login(request.getParameter("username"), request.getParameter("password")) != null) {;
+			session.setAttribute("user", metierUtilisateur);
+		}
 		response.sendRedirect(request.getContextPath() +"/LoginServlet");
 	}
 
